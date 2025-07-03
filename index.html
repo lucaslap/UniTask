@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTasks - Organizador de Tarefas Acadêmicas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📚 UniTasks</h1>
+            <p>Organize suas tarefas acadêmicas de forma simples e eficiente</p>
+            <div class="stats">
+                <span class="pending-count">Pendentes: <span id="pendingCount">0</span></span>
+                <div class="export-dropdown">
+                    <button id="exportBtn" class="export-btn">📤 Exportar ▼</button>
+                    <div class="export-options" id="exportOptions">
+                        <button class="export-option" onclick="app.exportTasks('json')">📄 Exportar JSON</button>
+                        <button class="export-option" onclick="app.exportTasks('excel')">📊 Exportar Excel</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="tasks">📋 Lista de Tarefas</button>
+            <button class="tab-btn" data-tab="calendar">📅 Calendário</button>
+            <button class="tab-btn" data-tab="pomodoro">🍅 Pomodoro</button>
+        </nav>
+
+        <!-- Task Form Modal -->
+        <div id="taskModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Nova Tarefa</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="taskForm">
+                    <div class="form-group">
+                        <label for="taskTitle">Título *</label>
+                        <input type="text" id="taskTitle" required maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Descrição</label>
+                        <textarea id="taskDescription" rows="3" maxlength="500"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDueDate">Data de Entrega *</label>
+                        <input type="date" id="taskDueDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskPriority">Prioridade</label>
+                        <select id="taskPriority">
+                            <option value="baixa">🟢 Baixa</option>
+                            <option value="media" selected>🟡 Média</option>
+                            <option value="alta">🔴 Alta</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="cancel-btn">Cancelar</button>
+                        <button type="submit" class="save-btn">Salvar Tarefa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tasks Tab -->
+            <div id="tasksTab" class="tab-content active">
+                <div class="tasks-header">
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="pending">Pendentes</button>
+                        <button class="filter-btn" data-filter="completed">Concluídas</button>
+                    </div>
+                    <button id="addTaskBtn" class="add-task-btn">➕ Nova Tarefa</button>
+                </div>
+                <div id="tasksList" class="tasks-list">
+                    <div class="empty-state">
+                        <p>📝 Nenhuma tarefa cadastrada ainda.</p>
+                        <p>Clique em "Nova Tarefa" para começar!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Tab -->
+            <div id="calendarTab" class="tab-content">
+                <div class="calendar-header">
+                    <button id="prevMonth" class="nav-btn">❮</button>
+                    <h2 id="currentMonth"></h2>
+                    <button id="nextMonth" class="nav-btn">❯</button>
+                </div>
+                <div id="calendar" class="calendar-grid"></div>
+            </div>
+
+            <!-- Pomodoro Tab -->
+            <div id="pomodoroTab" class="tab-content">
+                <div class="pomodoro-container">
+                    <div class="pomodoro-header">
+                        <h2>🍅 Técnica Pomodoro</h2>
+                        <p class="pomodoro-description">Melhore sua produtividade com ciclos de foco e descanso</p>
+                    </div>
+
+                    <div class="pomodoro-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Ciclos Concluídos</span>
+                            <span class="stat-value" id="completedCycles">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Status Atual</span>
+                            <span class="stat-value" id="currentStatus">Pronto para começar</span>
+                        </div>
+                    </div>
+
+                    <div class="pomodoro-timer">
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        <div class="timer-progress">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <div class="timer-type" id="timerType">Foco</div>
+                    </div>
+
+                    <div class="pomodoro-controls">
+                        <button id="startBtn" class="control-btn start-btn">▶️ Iniciar</button>
+                        <button id="pauseBtn" class="control-btn pause-btn" disabled>⏸️ Pausar</button>
+                        <button id="resetBtn" class="control-btn reset-btn">🔄 Resetar</button>
+                    </div>
+
+                    <div class="pomodoro-cycles">
+                        <h3>Histórico de Ciclos</h3>
+                        <div class="cycles-display" id="cyclesDisplay">
+                            <!-- Ciclos serão renderizados aqui -->
+                        </div>
+                    </div>
+
+                    <div class="pomodoro-info">
+                        <h3>Como funciona?</h3>
+                        <ul>
+                            <li>🎯 <strong>Foco:</strong> 25 minutos de trabalho concentrado</li>
+                            <li>☕ <strong>Pausa curta:</strong> 5 minutos de descanso</li>
+                            <li>🏖️ <strong>Pausa longa:</strong> 15 minutos a cada 4 ciclos</li>
+                            <li>🔁 <strong>Repita:</strong> Continue o ciclo para máxima produtividade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
