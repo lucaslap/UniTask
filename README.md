@@ -118,3 +118,19 @@ O UniTasks solicita permissão para enviar notificações do navegador para:
 - Alertar quando sessões Pomodoro terminam
 - Lembrar sobre transições entre foco e pausas
 - Manter você informado mesmo com a aba em segundo plano
+
+## 📘 O que aprendi com esse projeto
+
+- Prática com manipulação do DOM usando JavaScript puro
+- Uso eficiente do localStorage para persistência de dados
+- Implementação de lógica de temporizador com `setInterval`
+- Organização de código em um projeto web real
+- Melhor compreensão do ciclo de produtividade Pomodoro
+
+## 🛠️ O que faria com mais tempo
+
+- Sistema de login com autenticação
+- Sincronização com Google Calendar
+- Integração com backend para salvar dados na nuvem
+- Versão mobile nativa com Flutter ou React Native
+- Dashboard com estatísticas avançadas de produtividade
