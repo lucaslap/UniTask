@@ -134,3 +134,8 @@ O UniTasks solicita permissão para enviar notificações do navegador para:
 - Integração com backend para salvar dados na nuvem
 - Versão mobile nativa com Flutter ou React Native
 - Dashboard com estatísticas avançadas de produtividade
+
+## 🔗 Acesse o Projeto
+
+👉 [uni-task-two.vercel.app](https://uni-task-two.vercel.app)
+
