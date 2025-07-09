@@ -1,0 +1,39 @@
+{
+  "name": "unitasks-mailer",
+  "version": "1.0.0",
+  "description": "Backend de envio automático de lembretes para o UniTasks",
+  "main": "mailer.js",
+  "scripts": {
+    "start": "node mailer.js",
+    "test": "node mailer.js --mock",
+    "test-today": "node mailer.js --mock --test-date=2025-07-08",
+    "real": "node mailer.js",
+    "dev": "nodemon mailer.js --mock",
+    "install-deps": "npm install",
+    "schedule": "node scheduler.js",
+    "schedule-test": "node scheduler.js --test",
+    "schedule-custom": "node scheduler.js --custom --cron=\"0 9 * * *\"",
+    "setup": "node setup.js"
+  },
+  "keywords": [
+    "nodejs",
+    "email",
+    "reminder",
+    "tasks",
+    "academic",
+    "nodemailer"
+  ],
+  "author": "UniTasks Team",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.9.7",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

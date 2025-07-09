@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Trabalho de TCC",
+    "description": "Finalizar o desenvolvimento do projeto de conclusão de curso",
+    "dueDate": "2025-07-08",
+    "email": "lucas.lap@outlook.com.br",
+    "priority": "alta"
+  },
+  {
+    "id": "2",
+    "title": "Prova de Matemática",
+    "description": "Estudar para a prova de cálculo diferencial",
+    "dueDate": "2025-07-09",
+    "email": "estudante@exemplo.com",
+    "priority": "media"
+  },
+  {
+    "id": "3",
+    "title": "Entrega do Relatório",
+    "description": "Relatório final do estágio supervisionado",
+    "dueDate": "2025-07-08",
+    "email": "outro.estudante@exemplo.com",
+    "priority": "alta"
+  },
+  {
+    "id": "4",
+    "title": "Apresentação do Projeto",
+    "description": "Apresentar o projeto de engenharia de software",
+    "dueDate": "2025-07-10",
+    "email": "estudante@exemplo.com",
+    "priority": "media"
+  },
+  {
+    "id": "5",
+    "title": "Seminário de História",
+    "description": "Apresentação sobre a Segunda Guerra Mundial",
+    "dueDate": "2025-07-08",
+    "email": "historiaestudante@exemplo.com",
+    "priority": "baixa"
+  }
+]
